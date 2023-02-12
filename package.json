@@ -10,6 +10,22 @@
 		"astro": "astro"
 	},
 	"dependencies": {
-		"astro": "^2.0.10"
+		"@astrojs/netlify": "^2.1.2",
+		"@astrojs/solid-js": "^2.0.2",
+		"@astrojs/tailwind": "^3.0.1",
+		"@formkit/auto-animate": "^1.0.0-beta.6",
+		"@json2csv/plainjs": "^6.1.2",
+		"@solid-primitives/clipboard": "^1.5.0",
+		"@tanstack/solid-table": "^8.0.0-alpha.89",
+		"astro": "^2.0.10",
+		"dayjs": "^1.11.7",
+		"nanoid": "^4.0.1",
+		"solid-icons": "^1.0.4",
+		"solid-js": "^1.6.10",
+		"solid-toast": "^0.4.0",
+		"tailwindcss": "^3.2.6"
+	},
+	"devDependencies": {
+		"@tailwindcss/typography": "^0.5.9"
 	}
 }
