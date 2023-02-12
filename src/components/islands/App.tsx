@@ -59,8 +59,11 @@ const App: Component = () => {
             <div class="grid grid-cols-8 w-full pt-4">
                 <fieldset class="col-span-7">
                     <legend class="text-sm">Transaction Fee %</legend>
+                    <label for="percent-range" class="sr-only">
+                        Transaction Fee Percent
+                    </label>
                     <input
-                        id="range"
+                        id="percent-range"
                         type="range"
                         min={0.1}
                         max={5.0}
@@ -79,8 +82,11 @@ const App: Component = () => {
             <div class="grid grid-cols-8 w-full pt-4">
                 <fieldset class="col-span-7">
                     <legend class="text-sm">Transaction Fee &cent;</legend>
+                    <label for="constant-range" class="sr-only">
+                        Transaction Fee Constant
+                    </label>
                     <input
-                        id="range"
+                        id="constant-range"
                         type="range"
                         min={0}
                         max={0.5}
@@ -103,7 +109,11 @@ const App: Component = () => {
                 <For each={products}>
                     {(product, i) => (
                         <div class="grid grid-cols-12 col-span-1">
+                            <label for="title" class="sr-only">
+                                Product Title
+                            </label>
                             <input
+                                id="title"
                                 type="text"
                                 value={product.title}
                                 maxlength="14"
