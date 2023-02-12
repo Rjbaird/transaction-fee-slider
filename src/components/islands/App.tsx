@@ -197,7 +197,7 @@ const App: Component = () => {
                                 class="col-span-1 inline-flex items-center space-x-2 px-4 py-2 text-sm font-medium text-red-700 hover:bg-red-100"
                             >
                                 <span>Remove</span>
-                                <OcX3 />
+                                <OcX3 class="hidden md:block" />
                             </button>
                         </div>
                     )}
