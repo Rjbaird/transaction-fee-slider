@@ -55,7 +55,7 @@ const App: Component = () => {
     };
 
     return (
-        <div class="grid justify-items-center">
+        <div class="grid justify-items-center min-w-full">
             <div class="grid grid-cols-8 w-full pt-4">
                 <fieldset class="col-span-7">
                     <legend class="text-sm">Transaction Fee %</legend>
