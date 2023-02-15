@@ -10,6 +10,7 @@ import { createLocalStore, removeIndex } from "./utils";
 const App: Component = () => {
     const [newFeePercent, setFeePercent] = createSignal(2.6);
     const [newFeeConstant, setFeeConstant] = createSignal(0.1);
+    const [newTaxes, setTaxes] = createSignal(7.5);
     const [newProductTitle, setProductTitle] = createSignal("");
     const [products, setProducts] = createLocalStore<Product[]>("product", []);
 
@@ -76,7 +77,7 @@ const App: Component = () => {
                     />
                 </fieldset>
                 <output class="text-lg grid place-content-end justify-self-start pl-2 tabular-nums">
-                    {newFeePercent().toFixed(1)}%
+                    {newFeePercent().toFixed(2)}%
                 </output>
             </div>
             <div class="grid grid-cols-8 w-full pt-4">
@@ -102,9 +103,40 @@ const App: Component = () => {
                     {newFeeConstant().toFixed(2)}&cent;
                 </output>
             </div>
+            <div class="grid grid-cols-8 w-full pt-4">
+                <fieldset class="col-span-7">
+                    <legend class="text-sm">Taxes %</legend>
+                    <label for="constant-range" class="sr-only">
+                        Taxes
+                    </label>
+                    <input
+                        id="constant-range"
+                        type="range"
+                        min={0}
+                        max={16}
+                        value={newTaxes()}
+                        onInput={(e) =>
+                            setTaxes(parseFloat(e.currentTarget.value))
+                        }
+                        step="0.01"
+                        class=" w-full h-1 bg-gray-200 rounded-lg accent-purple-500 cursor-pointer range-lg self-center"
+                    />
+                </fieldset>
+                <output class="text-lg grid place-content-end justify-self-start pl-2 tabular-nums">
+                    {newTaxes().toFixed(2)}%
+                </output>
+            </div>
             <div class="w-full py-4">
-                <div class="grid grid-cols-12 col-span-1">
-                    <div class="col-span-4"></div>
+                <div class="grid grid-cols-12 col-span-1 pb-2">
+                    <p class="text-xl text-slate-800 underline font-extrabold col-span-4">
+                        Products
+                    </p>
+                    <p class="text-xl text-slate-800 underline font-extrabold col-span-3">
+                        Price
+                    </p>
+                    <p class="text-xl text-slate-800 underline font-extrabold">
+                        Profit
+                    </p>
                 </div>
                 <For each={products}>
                     {(product, i) => (
@@ -155,11 +187,27 @@ const App: Component = () => {
                                             )
                                         }
                                     />
+                                    <Show
+                                        when={newTaxes() > 0}
+                                        fallback={
+                                            <p class="w-1/3 justify-end pt-2 font-thin text-gray-400 text-xs tabular-nums">
+                                                ${0.0}
+                                            </p>
+                                        }
+                                    >
+                                        <span class="w-3/8 justify-end pt-2 font-thin text-gray-400 text-xs tabular-nums">
+                                            +$
+                                            {(
+                                                (product.price * newTaxes()) /
+                                                100
+                                            ).toFixed(2)}
+                                        </span>
+                                    </Show>
                                 </div>
                             </div>
                             <div class="col-span-3 pl-2">
                                 <label for="price" class=" sr-only">
-                                    Product Price
+                                    Product Profit
                                 </label>
                                 <div class="flex flex-row">
                                     <span class="text-gray-500 sm:text-sm">
@@ -175,10 +223,14 @@ const App: Component = () => {
                                     >
                                         <p class="col-span-3 tabular-nums">
                                             {(
-                                                product.price -
-                                                (product.price *
-                                                    (newFeePercent() / 100) +
-                                                    newFeeConstant())
+                                                product.price +
+                                                product.price *
+                                                    (newTaxes() / 100) -
+                                                (product.price +
+                                                    product.price *
+                                                        (newTaxes() / 100)) *
+                                                    (newFeePercent() / 100) -
+                                                newFeeConstant()
                                             ).toFixed(2)}
                                         </p>
                                     </Show>
@@ -194,7 +246,7 @@ const App: Component = () => {
                                     setProducts((t) => removeIndex(t, i()));
                                     notify();
                                 }}
-                                class="col-span-1 inline-flex items-center space-x-2 px-4 py-2 text-sm font-medium text-red-700 hover:bg-red-100"
+                                class="col-span-2 inline-flex items-center space-x-2 px-4 py-2 text-sm font-medium text-red-700 hover:bg-red-100 w-2/3"
                             >
                                 <span>Remove</span>
                                 <OcX3 class="hidden md:block" />

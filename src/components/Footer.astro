@@ -1,12 +1,12 @@
 ---
-const today = new Date();
+import { Icon } from "astro-icon";
 const svgBaseClass = `w-6 h-6 fill-current stroke-2 text-`;
 const icons = [
     {
         name: "Github",
         handle: "simple-icons:github",
-        color: `${svgBaseClass} hover:text-[#ffffff]`,
-        link: "https://github.com/Rjbaird",
+        color: `${svgBaseClass} hover:text-gray-700`,
+        link: "https://github.com/Rjbaird/transaction-fee-slider",
     },
 ];
 ---
@@ -14,8 +14,12 @@ const icons = [
 <footer class="text-white sticky top-[100vh] py-6 px-3 md:px-0">
     <div class="max-w-7xl mx-auto flex md:items-center justify-between">
         <div class="flex gap-2">
-            &copy;{today.getFullYear()}
-            <span class="hidden md:block">Ryan Baird</span>
+            <span class="text-black text-sm"
+                >Made by <a
+                    href="https://ryanbaird.com/"
+                    class="hover:text-blue-400 underline">Ryan</a
+                ></span
+            >
         </div>
         <div class="flex justify-center space-x-6 md:order-2">
             {
@@ -24,9 +28,10 @@ const icons = [
                         href={icon.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="text-black hover:text-gray-600"
+                        class="text-black hover:text-gray-300"
                     >
-                        <span class="text-xs">{icon.name}</span>
+                    <Icon class={icon.color} name={icon.handle} />
+                    <span class="sr-only">{icon.name}</span>
                     </a>
                 ))
             }

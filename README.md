@@ -1,0 +1,1 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/df520cda-d268-47db-9793-a7e9e4d97cc4/deploy-status)](https://app.netlify.com/sites/transaction-fee-calculator/deploys)
